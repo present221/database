@@ -1,0 +1,17 @@
+version: '3'
+services:
+  database:
+   build: .
+   container_name: clothshopdatabase
+   environment:
+    MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    MYSQL_DATABASE: ${MYSQL_DATABASE}
+   volumes:
+     - ./clothshopscript/clothshopmysql:/var/lib/mysql
+     - ./clothshopscript/:/docker-entrypoint-initdb.d
+   ports:
+     - "3306:3306"
+networks:
+    default:
+     external:
+      name: clothshopnetwork
